@@ -35,6 +35,8 @@ class Player:
         self.pos = (self.x, self.y)
         self.x += self.velocity[0]
 
+        if self.velocity[1] < -5:
+            self.velocity[1] = -5
         if self.y > HEIGHT:
             self.y = HEIGHT
             self.velocity[1] = 0
@@ -57,6 +59,7 @@ class Player:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
             # flap_sound.play()
+                self.velocity[1] = 0
                 self.velocity[1] += -10
 
 class Pipes:
@@ -123,6 +126,7 @@ def main():
     generate_pipe(5)
     running = True
     while running:
+        print(player.velocity)
 
         dt = clock.tick(60) / 1000
 
@@ -194,9 +198,12 @@ def main_menu():
                 player.handle_input(event)
 
                 if event.type == pygame.KEYDOWN:
+                    print("key down")
                     if event.key == pygame.K_SPACE:
                         running = False
                         main()
+                        print("start")
+
             pygame.display.flip()
 
         font = pygame.font.SysFont("Arial", 50)
