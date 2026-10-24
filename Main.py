@@ -173,8 +173,17 @@ def main():
 
 def lose():
     running = True
+
+    font = pygame.font.Font(None, 72)
+    dead_text = font.render("YOU DIED", True, (255, 0, 0))
+    text_rect = dead_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     while running:
         screen.fill((0, 0, 0))
+
+        # ADD DEAD TEXT
+        screen.blit(dead_text, text_rect)
+        pygame.display.flip()
+
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
